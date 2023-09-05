@@ -1,10 +1,12 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
+require("hardhat-gas-reporter");
 
 /** @type import('hardhat/config').HardhatUserConfig */
 
 const SEPOLIA_RPC_NETWORK = process.env.SEPOLIA_RPC_URL;
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const COINMARKETCAP = process.env.COINMARKETCAP;
 console.log(SEPOLIA_RPC_NETWORK);
 module.exports = {
   defaultNetwork: "hardhat",
@@ -20,4 +22,11 @@ module.exports = {
     },
   },
   solidity: "0.8.19",
+  gasReporter: {
+    enabled: true,
+    outputFile: "gas-report.txt",
+    noColors: true,
+    currency: "USD",
+    coinmarketcap: COINMARKETCAP,
+  },
 };
