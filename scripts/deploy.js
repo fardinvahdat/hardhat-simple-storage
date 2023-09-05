@@ -5,7 +5,17 @@ async function main() {
   console.log("Deploying contract . . . ");
   const simpleStorage = await SimpleStorageFactory.deploy();
   await simpleStorage.waitForDeployment();
-  console.log(simpleStorage);
+
+  //ineract with contract
+
+  const currentFavoriteNumber = await simpleStorage.retrieve();
+  console.log(`current favorite number is : ${currentFavoriteNumber}`);
+
+  const txResponse = await simpleStorage.store(7);
+  await txResponse.wait(1);
+
+  const updatedValue = await simpleStorage.retrieve();
+  console.log(`updated favorite number is : ${updatedValue}`);
 }
 
 main()
